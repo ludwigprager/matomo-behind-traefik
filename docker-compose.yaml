@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  traefik:
+    image: "traefik:v2.8.1"
+    container_name: traefik
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+      - "8123:8123"
+      - "443:443"
+
+    volumes:
+      - "./traefik.yaml:/traefik.yml:ro"
+      - "./configuration/:/configuration/:ro"
+
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true

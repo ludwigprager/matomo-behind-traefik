@@ -1,0 +1,33 @@
+# https://doc.traefik.io/traefik/reference/dynamic-configuration/file/
+
+http:
+  routers:
+    cya-router:
+      rule: "Host(`cya.celp.de`)"
+      service: cya-service
+      priority: 1000
+      entryPoints:
+        - web-secure
+      tls:
+        certResolver: myresolver
+
+    matomo-router:
+      rule: "Host(`stats.celp.de`)"
+      service: matomo-service
+      priority: 1000
+      entryPoints:
+        - web-secure
+      tls:
+        certResolver: myresolver
+
+  services:
+    cya-service:
+      loadBalancer:
+        servers:
+        - url: "http://webserver:8080/"
+
+    matomo-service:
+      loadBalancer:
+        servers:
+        - url: "http://matomo/"
+

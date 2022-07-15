@@ -1,0 +1,36 @@
+log:
+  level: INFO
+
+api:
+  insecure: true
+  dashboard: true
+
+entryPoints:
+  traefik:
+    address: ":8123"
+  web-secure:
+    address: ":443"
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: web-secure
+          scheme: https
+          permanent: true
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: ludwig.prager@celp.de
+      storage: acme.json
+      certificatesDuration: 72
+      tlsChallenge: {}
+
+accessLog: {}
+errorLog: {}
+
+providers:
+  file:
+    directory: /configuration
+    watch: true
