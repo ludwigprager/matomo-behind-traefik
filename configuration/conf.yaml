@@ -2,9 +2,9 @@
 
 http:
   routers:
-    cya-router:
-      rule: "Host(`cya.celp.de`)"
-      service: cya-service
+    www-router:
+      rule: "Host(`www.example.com`)"
+      service: www-service
       priority: 1000
       entryPoints:
         - web-secure
@@ -12,7 +12,7 @@ http:
         certResolver: myresolver
 
     matomo-router:
-      rule: "Host(`stats.celp.de`)"
+      rule: "Host(`stats.example.com`)"
       service: matomo-service
       priority: 1000
       entryPoints:
@@ -21,7 +21,7 @@ http:
         certResolver: myresolver
 
   services:
-    cya-service:
+    www-service:
       loadBalancer:
         servers:
         - url: "http://webserver:8080/"

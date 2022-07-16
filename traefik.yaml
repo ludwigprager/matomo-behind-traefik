@@ -22,7 +22,7 @@ entryPoints:
 certificatesResolvers:
   myresolver:
     acme:
-      email: ludwig.prager@celp.de
+      email: admin@example.com
       storage: acme.json
       certificatesDuration: 72
       tlsChallenge: {}
